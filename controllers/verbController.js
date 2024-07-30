@@ -11,6 +11,7 @@ const getVerbConjugation = async (req, res) => {
 
     const conjugations = {};
 
+    // Caso o verbo pesquisado esteja flexionado pega a identificação apresentada pelo site e refaz a busca
     const flexionInfo = $(".flection-info");
     if (flexionInfo.length > 0) {
       const href = flexionInfo.find("a").attr("href");
