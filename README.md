@@ -22,8 +22,8 @@ Esta API utiliza web scraping para buscar conjugações de verbos em português 
 // http://localhost:3000/amar
 
 {
-  "Indicativo": {
-    "Presente": [
+  "indicativo": {
+    "presente": [
       "amo",
       "amas",
       "ama",
@@ -31,7 +31,7 @@ Esta API utiliza web scraping para buscar conjugações de verbos em português 
       "amais",
       "amam"
     ],
-    "Pretérito Imperfeito": [
+    "preteritoImperfeito": [
       "amava",
       "amavas",
       "amava",
@@ -39,7 +39,7 @@ Esta API utiliza web scraping para buscar conjugações de verbos em português 
       "amáveis",
       "amavam"
     ],
-    "Pretérito Perfeito": [
+    "preteritoPerfeito": [
       "amei",
       "amaste",
       "amou",
@@ -47,7 +47,7 @@ Esta API utiliza web scraping para buscar conjugações de verbos em português 
       "amastes",
       "amaram"
     ],
-    "Pretérito Mais-que-perfeito": [
+    "preteritoMaisQuePerfeito": [
       "amara",
       "amaras",
       "amara",
@@ -55,7 +55,7 @@ Esta API utiliza web scraping para buscar conjugações de verbos em português 
       "amáreis",
       "amaram"
     ],
-    "Futuro do Presente": [
+    "futuroDoPresente": [
       "amarei",
       "amarás",
       "amará",
@@ -63,7 +63,7 @@ Esta API utiliza web scraping para buscar conjugações de verbos em português 
       "amareis",
       "amarão"
     ],
-    "Futuro do Pretérito": [
+    "futuroDoPreterito": [
       "amaria",
       "amarias",
       "amaria",
@@ -72,8 +72,8 @@ Esta API utiliza web scraping para buscar conjugações de verbos em português 
       "amariam"
     ]
   },
-  "Subjuntivo": {
-    "Presente": [
+  "subjuntivo": {
+    "presente": [
       "ame",
       "ames",
       "ame",
@@ -81,7 +81,7 @@ Esta API utiliza web scraping para buscar conjugações de verbos em português 
       "ameis",
       "amem"
     ],
-    "Pretérito Imperfeito": [
+    "preteritoImperfeito": [
       "amasse",
       "amasses",
       "amasse",
@@ -89,7 +89,7 @@ Esta API utiliza web scraping para buscar conjugações de verbos em português 
       "amásseis",
       "amassem"
     ],
-    "Futuro": [
+    "futuro": [
       "amar",
       "amares",
       "amar",
@@ -98,22 +98,24 @@ Esta API utiliza web scraping para buscar conjugações de verbos em português 
       "amarem"
     ]
   },
-  "ImperativoInfinitivo": {
-    "Imperativo Afirmativo": [
+  "imperativo": {
+    "imperativoAfirmativo": [
       "ama",
       "ame",
       "amemos",
       "amai",
       "amem"
     ],
-    "Imperativo Negativo": [
+    "imperativoNegativo": [
       "ames",
       "ame",
       "amemos",
       "ameis",
       "amem"
-    ],
-    "Infinitivo Pessoal": [
+    ]
+  },
+  "infinitivo": {
+    "infinitivoPessoal": [
       "amar",
       "amares",
       "amar",
