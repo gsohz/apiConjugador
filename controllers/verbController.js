@@ -1,5 +1,6 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
+const { toCamelCase } = require("../utils/toCamelCase");
 
 const getVerbConjugation = async (req, res) => {
   const { verb } = req.params;
@@ -21,42 +22,14 @@ const getVerbConjugation = async (req, res) => {
       $ = cheerio.load(data);
     }
 
-    // Itera sobre cada linha de conjugação principal
-    $("#conjugacao .conj-row").each((index, rowElement) => {
-      // Obtém o título da categoria de conjugação (como "Indicativo", "Subjuntivo", etc.)
-      const categoryTitle = $(rowElement)
-        .find(".verb-tense--title")
-        .text()
-        .trim();
+    // Obtém conjugação da tabela "Indicativo" e "Subjuntivo"
+    extractConjugations($, "#conjugacao .col-three", conjugations);
 
-      // Inicializa a categoria se ainda não existir
-      if (!conjugations[categoryTitle]) {
-        conjugations[categoryTitle] = {};
-      }
+    // Obtém conjugação da tabela "Imperativo"
+    extractConjugations($, "#conjugacao .col-two-third", conjugations);
 
-      // Itera sobre cada bloco de conjugação dentro da linha
-      $(rowElement)
-        .find(".verb-col")
-        .each((verbIndex, verbElement) => {
-          // Obtém o tempo verbal
-          const tense = $(verbElement)
-            .find(".verb-tense--subtitle")
-            .text()
-            .trim();
-
-          // Inicializa o array para armazenar as formas verbais
-          const forms = [];
-
-          // Itera sobre cada elemento com a classe 'f'
-          $(verbElement)
-            .find(".f")
-            .each((i, formElement) => {
-              forms.push($(formElement).text().trim());
-            });
-
-          conjugations[categoryTitle][tense] = forms;
-        });
-    });
+    // Obtém conjugação da tabela "Infinitivo"
+    extractConjugations($, "#conjugacao .col-one-third", conjugations);
 
     res.status(200).json(conjugations);
   } catch (error) {
@@ -64,5 +37,33 @@ const getVerbConjugation = async (req, res) => {
     console.error("Erro ao obter a conjugação: ", error);
   }
 };
+
+function extractConjugations($, selector, conjugations) {
+  $(selector).each((index, rowElement) => {
+    let categoryTitle = $(rowElement).find(".verb-tense--title").text();
+    categoryTitle = toCamelCase(categoryTitle);
+
+    if (!conjugations[categoryTitle]) {
+      conjugations[categoryTitle] = {};
+    }
+
+    $(rowElement)
+      .find(".verb-col")
+      .each((verbIndex, verbElement) => {
+        let tense = $(verbElement).find(".verb-tense--subtitle").text();
+        tense = toCamelCase(tense);
+
+        const forms = [];
+
+        $(verbElement)
+          .find(".f")
+          .each((i, formElement) => {
+            forms.push($(formElement).text().trim());
+          });
+
+        conjugations[categoryTitle][tense] = forms;
+      });
+  });
+}
 
 module.exports = { getVerbConjugation };
